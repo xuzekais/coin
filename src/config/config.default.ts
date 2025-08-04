@@ -38,9 +38,21 @@ export default {
                 password: 'jv1234', // 替换为你的数据库密码
                 database: 'db_binance', // 替换为你的数据库名称
                 synchronize: true, // 开发环境下自动同步实体结构（生产环境建议关闭）
-                logging: false,
+                logging: true,
                 entities: ['**/entity/*.entity{.ts,.js}'], // 实体文件位置
             }
         }
+    },
+
+    // 企业微信配置
+    wechatWork: {
+        // 机器人webhook地址
+        robotWebhook: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=dcce237d-30f4-47f0-b1e3-4a789aaf46af',
+        // 企业ID，用于应用消息
+        corpId: 'your-corp-id',
+        // 应用的凭证密钥
+        corpSecret: 'your-corp-secret',
+        // 应用ID
+        agentId: 1000001
     },
 } as MidwayConfig;
