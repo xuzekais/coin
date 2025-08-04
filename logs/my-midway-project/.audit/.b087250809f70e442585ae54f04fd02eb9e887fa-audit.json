@@ -1,0 +1,25 @@
+{
+  "keep": {
+    "days": true,
+    "amount": 31
+  },
+  "auditLog": "/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/logs/my-midway-project/.audit/.b087250809f70e442585ae54f04fd02eb9e887fa-audit.json",
+  "files": [
+    {
+      "date": 1753545061822,
+      "name": "/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/logs/my-midway-project/midway-app.log.2025-07-27",
+      "hash": "6675ca5b41e5cd702229a7243750e54c"
+    },
+    {
+      "date": 1753626656748,
+      "name": "/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/logs/my-midway-project/midway-app.log.2025-07-28",
+      "hash": "f0f7c4b8b443a2032f662993d0075e7a"
+    },
+    {
+      "date": 1753718586625,
+      "name": "/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/logs/my-midway-project/midway-app.log.2025-07-29",
+      "hash": "f32629dae65763a3d26d283c09a627f8"
+    }
+  ],
+  "hashType": "md5"
+}

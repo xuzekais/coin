@@ -1,0 +1,220 @@
+2025-07-28 00:56:09,444 ERROR 7641 [-/::ffff:127.0.0.1/-/5ms GET /api/useSchedule] TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'Timeout'
+    |     property '_idlePrev' -> object with constructor 'TimersList'
+    --- property '_idleNext' closes the circle
+    at JSON.stringify (<anonymous>)
+    at respond (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa@2.16.1/node_modules/koa/lib/application.js:306:15)
+    at handleResponse (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa@2.16.1/node_modules/koa/lib/application.js:184:34)
+2025-07-28 01:00:52,857 ERROR 8595 [-/::ffff:127.0.0.1/-/10ms GET /api/useSchedule] TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'Timeout'
+    |     property '_idlePrev' -> object with constructor 'TimersList'
+    --- property '_idleNext' closes the circle
+    at JSON.stringify (<anonymous>)
+    at respond (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa@2.16.1/node_modules/koa/lib/application.js:306:15)
+    at handleResponse (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa@2.16.1/node_modules/koa/lib/application.js:184:34)
+2025-07-28 01:02:30,918 ERROR 8692 [-/::ffff:127.0.0.1/-/8ms GET /api/useSchedule] TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'Timeout'
+    |     property '_idlePrev' -> object with constructor 'TimersList'
+    --- property '_idleNext' closes the circle
+    at JSON.stringify (<anonymous>)
+    at respond (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa@2.16.1/node_modules/koa/lib/application.js:306:15)
+    at handleResponse (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa@2.16.1/node_modules/koa/lib/application.js:184:34)
+2025-07-28 01:05:44,684 ERROR 8928 [-/::ffff:127.0.0.1/-/60ms GET /api/useSchedule] AxiosError: connect ECONNREFUSED :::443
+    at Function.AxiosError.from (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/axios@1.11.0/node_modules/axios/lib/core/AxiosError.js:92:14)
+    at RedirectableRequest.handleRequestError (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/axios@1.11.0/node_modules/axios/lib/adapters/http.js:620:25)
+    at RedirectableRequest.emit (node:events:517:28)
+    at RedirectableRequest.emit (node:domain:489:12)
+    at ClientRequest.eventHandlers.<computed> (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/follow-redirects@1.15.9/node_modules/follow-redirects/index.js:49:24)
+    at ClientRequest.emit (node:events:517:28)
+    at ClientRequest.emit (node:domain:489:12)
+    at TLSSocket.socketErrorListener (node:_http_client:501:9)
+    at TLSSocket.emit (node:events:517:28)
+    at TLSSocket.emit (node:domain:489:12)
+    at Axios.request (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/axios@1.11.0/node_modules/axios/lib/core/Axios.js:45:41)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async MyScheduleService.fetchBinanceData (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/service/mySchedule.service.ts:23:21)
+    at async MyScheduleService.useSchedule (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/service/mySchedule.service.ts:6:9)
+    at async APIController.useSchedule (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/controller/api.controller.ts:31:21)
+    at async /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/@midwayjs+core@3.20.4/node_modules/@midwayjs/core/dist/common/webGenerator.js:43:26
+    at async /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/middleware/report.middleware.ts:12:24
+    at async /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/@midwayjs+info@3.20.5/node_modules/@midwayjs/info/dist/middleware/info.middleware.js:35:24
+    at async /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/@midwayjs+i18n@3.20.5/node_modules/@midwayjs/i18n/dist/middleware.js:150:17
+    at async bodyParser (/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/node_modules/.pnpm/koa-bodyparser@4.4.1/node_modules/koa-bodyparser/index.js:78:5) {
+  port: 443,
+  address: '::',
+  syscall: 'connect',
+  code: 'ECONNREFUSED',
+  errno: -61,
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function [FormData]], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/1.11.0',
+      'Content-Length': '101',
+      'Accept-Encoding': 'gzip, compress, deflate, br'
+    },
+    method: 'post',
+    url: 'https://www.binance.com/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/order-history',
+    data: '{"portfolioId":"4286585043378852352","startTime":1698748800000,"endTime":1698835199999,"pageSize":10}',
+    allowAbsoluteUrls: true
+  },
+  request: <ref *1> Writable {
+    _writableState: WritableState {
+      objectMode: false,
+      highWaterMark: 16384,
+      finalCalled: false,
+      needDrain: false,
+      ending: false,
+      ended: false,
+      finished: false,
+      destroyed: false,
+      decodeStrings: true,
+      defaultEncoding: 'utf8',
+      length: 0,
+      writing: false,
+      corked: 0,
+      sync: true,
+      bufferProcessing: false,
+      onwrite: [Function: bound onwrite],
+      writecb: null,
+      writelen: 0,
+      afterWriteTickInfo: null,
+      buffered: [],
+      bufferedIndex: 0,
+      allBuffers: true,
+      allNoop: true,
+      pendingcb: 0,
+      constructed: true,
+      prefinished: false,
+      errorEmitted: false,
+      emitClose: true,
+      autoDestroy: true,
+      errored: null,
+      closed: false,
+      closeEmitted: false,
+      [Symbol(kOnFinished)]: []
+    },
+    _events: [Object: null prototype] {
+      response: [Function: handleResponse],
+      error: [Function: handleRequestError],
+      socket: [Function: handleRequestSocket]
+    },
+    _eventsCount: 3,
+    _maxListeners: undefined,
+    _options: {
+      maxRedirects: 21,
+      maxBodyLength: Infinity,
+      protocol: 'https:',
+      path: '/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/order-history',
+      method: 'POST',
+      headers: [Object: null prototype],
+      agents: [Object],
+      auth: undefined,
+      family: undefined,
+      beforeRedirect: [Function: dispatchBeforeRedirect],
+      beforeRedirects: [Object],
+      hostname: 'www.binance.com',
+      port: '',
+      agent: undefined,
+      nativeProtocols: [Object],
+      pathname: '/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/order-history'
+    },
+    _ended: false,
+    _ending: true,
+    _redirectCount: 0,
+    _redirects: [],
+    _requestBodyLength: 101,
+    _requestBodyBuffers: [ [Object] ],
+    _onNativeResponse: [Function (anonymous)],
+    _currentRequest: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: true,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: '101',
+      _hasBody: true,
+      _trailer: '',
+      finished: false,
+      _headerSent: true,
+      _closed: false,
+      socket: [TLSSocket],
+      _header: 'POST /bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/order-history HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/1.11.0\r\n' +
+        'Content-Length: 101\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: www.binance.com\r\n' +
+        'Connection: close\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/order-history',
+      _ended: false,
+      res: null,
+      aborted: false,
+      timeoutCb: null,
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'www.binance.com',
+      protocol: 'https:',
+      _redirectable: [Circular *1],
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    _currentUrl: 'https://www.binance.com/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/order-history',
+    [Symbol(kCapture)]: false
+  },
+  cause: Error: connect ECONNREFUSED :::443
+      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1555:16) {
+    errno: -61,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '::',
+    port: 443
+  }
+}

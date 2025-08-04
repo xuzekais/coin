@@ -1,0 +1,54 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es2022",
+        "module": "esnext",
+        "removeComments": false,
+        "strict": false,
+        "esModuleInterop": true,
+        "noImplicitAny": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "charset": "utf8",
+        "allowJs": false,
+        "pretty": true,
+        "noEmitOnError": false,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "strictPropertyInitialization": false,
+        "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "sourceMap": false,
+        "importHelpers": true,
+        "resolveJsonModule": true,
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment",
+        "types": ["node", "vite/client"],
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@app/*": ["../src/*"],
+            "@asset/*": ["./asset/*"],
+            "react/jsx-runtime": [
+                "./src/typings/jsx-runtime.d.ts"
+            ]
+        },
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": false,
+        "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    },
+    "include": [
+        "src/*",
+        "src/**/*.ts",
+        "src/**/*.vue",
+        "src/**/*.tsx",
+        "src/typings/*.ts",
+        "src/typings/*.d.ts",
+    ],
+    "exclude": ["node_modules*"]
+}

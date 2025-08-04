@@ -1,0 +1,8 @@
+2025-07-28 00:55:34,188 INFO 7641 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
+2025-07-28 00:55:37,382 INFO 7641 [midway:view-nunjucks] loading templates from ["/Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/view"]
+2025-07-28 01:00:52,849 INFO 8595 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
+2025-07-28 01:02:30,912 INFO 8692 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
+2025-07-28 01:05:44,625 INFO 8928 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
+2025-07-28 01:08:51,148 INFO 9022 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
+2025-07-28 01:29:09,952 INFO 9500 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
+2025-07-28 01:31:18,692 INFO 9571 [midway:static] starting static serve /public/ -> /Users/xuzekai/Desktop/Charles/myProject/cryp/midway-vite-vue3-ts-tsx/src/public
