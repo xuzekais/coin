@@ -55,4 +55,13 @@ export default {
         // 应用ID
         agentId: 1000001
     },
+
+    redis: {
+        client: {
+        port: 6379, // Redis port
+        host: "127.0.0.1", // Redis host
+        password: "test11",
+        db: 0,
+        },
+    },
 } as MidwayConfig;

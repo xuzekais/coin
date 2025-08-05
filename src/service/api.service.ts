@@ -6,9 +6,10 @@ import { OrderTakerService } from './order_taker.service';
 import { TradeRecordService } from './trade_record.service';
 import { TradeRecord } from '../entity/trade_record.entity';
 import { SendMessageService } from './send_message.service';
+import { RedisService } from '@midwayjs/redis';
 const maxRetries = 3;
 const retryDelay = 2000; // 2秒
-const agent = new HttpsProxyAgent('http://127.0.0.1:7890')
+// const agent = new HttpsProxyAgent('http://127.0.0.1:7890')
 // 配置axios实例
 const axiosInstance = axios.create({
     timeout: 30000, // 30秒超时
@@ -154,6 +155,10 @@ const mockData = [
 @Provide()
 export class APIService {
     @Inject()
+    redis: RedisService;
+
+
+    @Inject()
     orderTakerService: OrderTakerService;
     
     @Inject()
@@ -161,6 +166,18 @@ export class APIService {
 
     @Inject()
     sendMessageService: SendMessageService;
+
+    /** 随机取一个节点，返回 httpsAgent，如果没节点就返回 undefined */
+    async createHttpsAgent() {
+        // 1. 随机拿一个节点，格式形如 1.2.3.4:8888
+        const node = await this.redis.srandmember('proxy_pool');
+        if (!node) return undefined;
+        console.log('使用代理节点:', node);
+        // 2. 拼成 http://ip:port 字符串
+        const proxyUrl = `http://${node}`;
+        console.log('代理URL:', proxyUrl);
+        return new HttpsProxyAgent(proxyUrl);
+    }
 
     /**
      * 通用API请求方法
@@ -173,6 +190,7 @@ export class APIService {
      */
     async fetchApiData(url: string, data: any, mock = false, mockResponse = null, config: AxiosRequestConfig = {}) {
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
+
             try {
                 console.log(`尝试第 ${attempt} 次连接API: ${url}...`);
                 
@@ -182,6 +200,8 @@ export class APIService {
                     res = mockResponse || mockData;
                     console.log('使用模拟数据');
                 } else {
+                    const agent = await this.createHttpsAgent();
+                    console.log('使用代理节点:', agent);
                     // 合并默认配置和传入配置
                     const requestConfig = {
                         httpsAgent: agent,
@@ -254,14 +274,14 @@ export class APIService {
     }
 
     // 获取单个领单员的交易操作记录
-    async fetchOrderTakerTradeRecords(portfolioId: string, mock = true) {
+    async fetchOrderTakerTradeRecords(portfolioId: string, mock = false) {
         // 准备请求参数
         const reqTimestamp = this.getReqTimestamp();
         console.log('请求时间戳:', reqTimestamp);
         const reqData = {
             portfolioId,
             ...reqTimestamp, // 使用处理后的时间戳
-            pageSize: 10, 
+            pageSize: 15, 
         };
         
         // 使用通用API请求方法
@@ -300,18 +320,14 @@ export class APIService {
         const hasNewData = compareFields.some(field => dbRecords[field] != resList[0][field]);
         if (hasNewData) {
             console.log('检测到新数据，准备更新数据库');
+            // 
             const saveResult = await this.processAndSaveTradeRecords(data.portfolioId, resList);
             console.log('保存结果:', saveResult);
-            // 处理企业微信发送的消息
-            // await this.sendMessageService.sendTextMessage('无新数据，无需更新')
-            // TODO: 计算持仓，并落库
-            // 这里可以添加逻辑来处理新数据，比如计算持仓等
-            
-
-        } else {
             const message = this.formatMessage(resList);
             await this.sendMessageService.sendMarkdownMessage(message);
-            console.log('无新数据，无需更新',message);
+
+        } else {
+            console.log('无新数据，无需更新');
         }
     }
 
@@ -348,7 +364,7 @@ export class APIService {
     }
 
     // 更新获取交易操作记录方法，添加数据保存功能
-    async fetchTradeRecords(mock = true) {
+    async fetchTradeRecords(mock = false) {
         // 1、读取领单员列表
         const orderTakersList = await this.orderTakerService.findAll();
         console.log('领单员列表:', orderTakersList);
@@ -371,9 +387,9 @@ export class APIService {
         let message = '';
         for(const item of list) {
             // 这里可以根据需要格式化消息内容
-            console.log(`处理消息: ${item.symbol} - ${item.side} - ${item.avgPrice}`);
+            // console.log(`处理消息: ${item.symbol} - ${item.side} - ${item.avgPrice}`);
 
-            message += `${this.formatTradeRecordMessage(item)}  |  以价格为：${item.avgPrice},操作${item.symbol},成交量为：${item.executedQty}\n`;
+            message += `${this.formatTradeRecordMessage(item)}  |  ${dayjs(item.orderTime).format('YYYY-MM-DD HH:mm:ss')} 以价格为：${item.avgPrice},操作${item.symbol},成交量为：${item.executedQty}\n`;
         }
         return message;
     }

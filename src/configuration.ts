@@ -11,7 +11,7 @@ import * as view from '@midwayjs/view-nunjucks';
 import 'tsconfig-paths/register';
 import * as cron from '@midwayjs/cron';
 import * as typeorm from '@midwayjs/typeorm'; // 使用新的typeorm模块
-
+import * as redis from '@midwayjs/redis';
 @Configuration({
   imports: [
     koa,
@@ -20,6 +20,7 @@ import * as typeorm from '@midwayjs/typeorm'; // 使用新的typeorm模块
     view,
     cron,
     typeorm, // 使用新的typeorm模块
+    redis,
     {
       component: info,
       enabledEnvironment: ['local'],
