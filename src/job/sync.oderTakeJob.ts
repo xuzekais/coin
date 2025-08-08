@@ -14,7 +14,7 @@ export class DataSyncJob implements IJob {
 
   async onTick() {
     console.log('定时任务触发五分钟一次');
-    await this.updateProxyPoolService.updateProxyPool();
+    // await this.updateProxyPoolService.updateProxyPool();
 
     // 更新一下代理池
     // await this.updateProxyPoolService.updateProxyPool();

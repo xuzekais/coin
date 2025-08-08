@@ -204,7 +204,7 @@ export class APIService {
                     console.log('使用代理节点:', agent);
                     // 合并默认配置和传入配置
                     const requestConfig = {
-                        httpsAgent: agent,
+                        httpsAgent: new HttpsProxyAgent('http://127.0.0.1:7890'),
                         ...config
                     };
                     
@@ -312,18 +312,25 @@ export class APIService {
     // 格式化交易记录
     async formatTradeRecord(data,resList){
         // 获取数据库中的最新交易记录
-        const dbRecords = await this.tradeRecordService.getLatestRecordByPortfolioId(data.portfolioId);
+        const dbRecords = await this.tradeRecordService.getLatestRecordByPortfolioId(data.portfolioId) ;
         console.log('数据库中的最新交易记录:', dbRecords);
 
         // 对比接口返回的数据和数据库的数据,symbol, orderTime, orderUpdateTime这几个字段是否相同
         const compareFields = ['symbol', 'orderTime', 'orderUpdateTime'];
-        const hasNewData = compareFields.some(field => dbRecords[field] != resList[0][field]);
+        const hasNewData = !dbRecords || !compareFields.every(field => dbRecords[field] == resList[0][field]);
         if (hasNewData) {
-            console.log('检测到新数据，准备更新数据库');
-            // 
+            console.log('检测到新数据，准备更新数据库',dbRecords?.orderUpdateTime, dayjs(Number(dbRecords?.orderUpdateTime)).format('YYYY-MM-DD HH:mm:ss'));
+            // 过滤已经保存过的数据
+            resList = resList.filter(item => {
+                console.log('时间的对比',dayjs(item.orderUpdateTime).format('YYYY-MM-DD HH:mm:ss'),
+                 dayjs(item.orderUpdateTime).isAfter(dayjs(Number(dbRecords?.orderUpdateTime))));
+                return !dbRecords || 
+                       dayjs(item.orderUpdateTime).isAfter(dayjs(Number(dbRecords?.orderUpdateTime)));
+            });
+            console.log('过滤后的新数据:', resList);
             const saveResult = await this.processAndSaveTradeRecords(data.portfolioId, resList);
             console.log('保存结果:', saveResult);
-            const message = this.formatMessage(resList);
+            const message = this.formatMessage(data,resList);
             await this.sendMessageService.sendMarkdownMessage(message);
 
         } else {
@@ -356,8 +363,8 @@ export class APIService {
             totalPnl: record.totalPnl || 0,
             orderUpdateTime: record.orderUpdateTime,
             orderTime: record.orderTime,
-        } as TradeRecord));
-        
+        } as TradeRecord)).sort((a, b) =>  a.orderUpdateTime -  b.orderUpdateTime);
+
         // 保存交易记录
         const savedRecords = await this.tradeRecordService.batchSaveRecords(tradeRecords);
         return { saved: savedRecords.length, total: records.length };
@@ -383,13 +390,13 @@ export class APIService {
     }
 
     //处理企业微信消息
-    formatMessage(list) {
-        let message = '';
+    formatMessage(data, list) {
+        let message = `领单员：**${data.nickname}**，投资组合ID：${data.portfolioId}\n`;
         for(const item of list) {
             // 这里可以根据需要格式化消息内容
             // console.log(`处理消息: ${item.symbol} - ${item.side} - ${item.avgPrice}`);
 
-            message += `${this.formatTradeRecordMessage(item)}  |  ${dayjs(item.orderTime).format('YYYY-MM-DD HH:mm:ss')} 以价格为：${item.avgPrice},操作${item.symbol},成交量为：${item.executedQty}\n`;
+            message += `${this.formatTradeRecordMessage(item)}  |  ${dayjs(item.orderTime).format('YYYY-MM-DD HH:mm:ss')} 以价格为：**${item.avgPrice}**，操作**${item.symbol}**，成交量为：${item.executedQty}，${item.totalPnl ? `已实现盈亏为：**${item.totalPnl}**` : ''}\n`;
         }
         return message;
     }
